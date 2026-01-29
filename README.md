@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Julien Mori - Portfolio
+
+A creative portfolio website featuring interactive 3D water ripple effects built with Next.js and React Three Fiber.
+
+## Features
+
+- Interactive water ripple simulation that responds to mouse movement
+- Custom GLSL shaders for realistic water rendering
+- Multi-pass rendering with ping-pong buffers for physics simulation
+- Smooth, performant animations using React Three Fiber
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org/) - React framework with App Router
+- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) - React renderer for Three.js
+- [Three.js](https://threejs.org/) - 3D graphics library
+- [GLSL](https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)) - Shader programming
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- [Bun](https://bun.sh/) (recommended) or Node.js 18+
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Clone the repository
+git clone https://github.com/julienmori/portfolio.git
+cd portfolio
+
+# Install dependencies
+bun install
+
+# Start development server
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── app/                  # Next.js App Router pages and components
+│   ├── page.tsx          # Home page
+│   ├── waterRipple.tsx   # Water ripple 3D component
+│   └── globals.css       # Global styles
+├── shaders/              # GLSL shader files
+│   └── waterRipple/      # Water effect shaders
+│       ├── vertex.glsl
+│       ├── buffer_a_fragment.glsl
+│       └── final_fragment.glsl
+├── public/               # Static assets
+└── static/               # Additional static files
+```
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Description |
+|---------|-------------|
+| `bun dev` | Start development server |
+| `bun run build` | Build for production |
+| `bun start` | Start production server |
+| `bun run lint` | Run ESLint |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How It Works
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The water ripple effect uses a technique inspired by [Shadertoy](https://www.shadertoy.com/):
 
-## Deploy on Vercel
+1. **Ripple Simulation**: A buffer pass simulates water physics using the wave equation, storing height values in a render target
+2. **Ping-Pong Rendering**: Two buffers alternate each frame to propagate ripple waves
+3. **Mouse Interaction**: Mouse position creates new ripple origins
+4. **Final Render**: The water surface is rendered with normals derived from the height map, creating realistic lighting and refraction
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
+
+## Author
+
+**Julien Mori**
+
+- Website: [julienmori.com](https://julienmori.com)
+- GitHub: [@julienmori](https://github.com/julienmori)
